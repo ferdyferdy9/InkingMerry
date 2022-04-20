@@ -1,0 +1,37 @@
+[gd_resource type="Theme" load_steps=8 format=2]
+
+[ext_resource path="res://theme/btn_normal.tres" type="StyleBox" id=1]
+[ext_resource path="res://assets/graphic/ui/button_pressed.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphic/ui/button_normal.png" type="Texture" id=3]
+[ext_resource path="res://assets/font/font_32.tres" type="DynamicFont" id=4]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, -20, 267, 111 )
+margin_top = 17.0
+expand_margin_left = 50.0
+expand_margin_right = 50.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, -20, 267, 111 )
+margin_top = 17.0
+expand_margin_left = 50.0
+expand_margin_right = 50.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 267, 91 )
+margin_top = 17.0
+expand_margin_left = 50.0
+expand_margin_right = 50.0
+expand_margin_bottom = 20.0
+
+[resource]
+default_font = ExtResource( 4 )
+Button/styles/focus = SubResource( 1 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = ExtResource( 1 )
+Button/styles/pressed = SubResource( 3 )

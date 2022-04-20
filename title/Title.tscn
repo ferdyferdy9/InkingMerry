@@ -1,0 +1,326 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://title/SceneBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://title/Title.gd" type="Script" id=2]
+[ext_resource path="res://assets/graphic/background/titlebgback.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphic/background/titlebgfront.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphic/ui/gamelogo.png" type="Texture" id=5]
+[ext_resource path="res://title/hide_on_browser.gd" type="Script" id=6]
+[ext_resource path="res://assets/graphic/maribel/maribelsnore1.png" type="Texture" id=7]
+[ext_resource path="res://game/maribel/animation/maribelsleeping.tres" type="Animation" id=8]
+[ext_resource path="res://assets/graphic/renko/RenkoWake_0000.png" type="Texture" id=9]
+[ext_resource path="res://assets/font/font_32.tres" type="DynamicFont" id=10]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "shake"
+length = 0.75
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 16, 0 ), Vector2( -16, 0 ), Vector2( 8, 0 ), Vector2( -7, 0 ), Vector2( 6, 0 ), Vector2( -3, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Snore:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Snore:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 151, 407 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Snore:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "snore_cycle"
+length = 10.0
+loop = true
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/path = NodePath("Snore:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5.04167, 5.20833, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Snore:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5.04167, 7.04167, 7.91667, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 151, 407 ), Vector2( 151, 407 ), Vector2( 700, 407 ), Vector2( 439, -71 ), Vector2( 439, -71 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Snore:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 5.04167, 7.04167, 7.91667, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, -720.0, -720.0 ]
+}
+tracks/3/type = "animation"
+tracks/3/path = NodePath("Renko/AnimationPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": PoolStringArray( "shake" ),
+"times": PoolRealArray( 7.04167 )
+}
+
+[node name="Title" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="TextureRect" parent="Background" index="0"]
+texture = ExtResource( 3 )
+
+[node name="TextureRect2" type="TextureRect" parent="Background" index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+
+[node name="lbl_msg" type="Label" parent="UI/Control" index="0"]
+visible = false
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -38.0
+margin_bottom = -5.0
+rect_min_size = Vector2( 0, 33 )
+text = "For people who have trouble mashing"
+align = 1
+
+[node name="Title" type="MarginContainer" parent="UI/Control" index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 50
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 50
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Control/Title" index="0"]
+margin_left = 20.0
+margin_top = 50.0
+margin_right = 834.0
+margin_bottom = 430.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Control/Title/VBoxContainer2" index="0"]
+modulate = Color( 0.878431, 0.878431, 0.878431, 1 )
+margin_left = 12.0
+margin_right = 801.0
+margin_bottom = 143.0
+size_flags_horizontal = 4
+size_flags_vertical = 2
+texture = ExtResource( 5 )
+
+[node name="MainContent" type="VBoxContainer" parent="UI/Control/Title/VBoxContainer2" index="1"]
+margin_top = 168.0
+margin_right = 814.0
+margin_bottom = 380.0
+
+[node name="btn_play" type="Button" parent="UI/Control/Title/VBoxContainer2/MainContent" index="0"]
+margin_left = 353.0
+margin_right = 460.0
+margin_bottom = 50.0
+size_flags_horizontal = 4
+size_flags_vertical = 2
+text = "Play"
+
+[node name="btn_options" type="Button" parent="UI/Control/Title/VBoxContainer2/MainContent" index="1"]
+margin_left = 332.0
+margin_top = 54.0
+margin_right = 482.0
+margin_bottom = 104.0
+size_flags_horizontal = 4
+size_flags_vertical = 2
+text = "Options"
+
+[node name="btn_credits" type="Button" parent="UI/Control/Title/VBoxContainer2/MainContent" index="2"]
+margin_left = 336.0
+margin_top = 108.0
+margin_right = 477.0
+margin_bottom = 158.0
+size_flags_horizontal = 4
+size_flags_vertical = 2
+text = "Credits"
+
+[node name="btn_exit" type="Button" parent="UI/Control/Title/VBoxContainer2/MainContent" index="3"]
+margin_left = 356.0
+margin_top = 162.0
+margin_right = 457.0
+margin_bottom = 212.0
+size_flags_horizontal = 4
+size_flags_vertical = 2
+text = "Exit"
+script = ExtResource( 6 )
+
+[node name="Difficulty" type="VBoxContainer" parent="UI/Control/Title/VBoxContainer2" index="2"]
+visible = false
+margin_left = 338.0
+margin_top = 192.0
+margin_right = 475.0
+margin_bottom = 380.0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="btn_normal" type="Button" parent="UI/Control/Title/VBoxContainer2/Difficulty" index="0"]
+margin_right = 137.0
+margin_bottom = 50.0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+text = "Normal"
+
+[node name="btn_easy" type="Button" parent="UI/Control/Title/VBoxContainer2/Difficulty" index="1"]
+margin_left = 13.0
+margin_top = 54.0
+margin_right = 124.0
+margin_bottom = 104.0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+text = "Easy"
+
+[node name="Control" type="Control" parent="UI/Control/Title/VBoxContainer2/Difficulty" index="2"]
+margin_left = 68.0
+margin_top = 108.0
+margin_right = 68.0
+margin_bottom = 134.0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="btn_back" type="Button" parent="UI/Control/Title/VBoxContainer2/Difficulty" index="3"]
+margin_left = 13.0
+margin_top = 138.0
+margin_right = 124.0
+margin_bottom = 188.0
+size_flags_horizontal = 4
+text = "Back"
+
+[node name="Node2D" type="Node2D" parent="." index="2"]
+modulate = Color( 0.45098, 0.494118, 0.72549, 1 )
+
+[node name="Maribel" type="Node2D" parent="Node2D" index="0"]
+position = Vector2( 156, 414 )
+
+[node name="Sprite" type="Sprite" parent="Node2D/Maribel" index="0"]
+texture = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/Maribel" index="1"]
+autoplay = "maribelsleeping"
+anims/maribelsleeping = ExtResource( 8 )
+
+[node name="Renko" type="Node2D" parent="Node2D" index="1"]
+position = Vector2( 695, 409 )
+
+[node name="Sprite" type="Sprite" parent="Node2D/Renko" index="0"]
+texture = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/Renko" index="1"]
+anims/RESET = SubResource( 2 )
+anims/shake = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D" index="2"]
+autoplay = "snore_cycle"
+anims/RESET = SubResource( 4 )
+anims/snore_cycle = SubResource( 3 )
+
+[node name="Snore" type="Node2D" parent="Node2D" index="3"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 151, 407 )
+
+[node name="Label" type="Label" parent="Node2D/Snore" index="0"]
+margin_left = -39.0
+margin_top = -20.0
+margin_right = 36.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 10 )
+text = "snore"
+
+[connection signal="pressed" from="UI/Control/Title/VBoxContainer2/MainContent/btn_play" to="." method="_on_btn_play_pressed"]
+[connection signal="pressed" from="UI/Control/Title/VBoxContainer2/MainContent/btn_options" to="." method="_on_btn_options_pressed"]
+[connection signal="pressed" from="UI/Control/Title/VBoxContainer2/MainContent/btn_credits" to="." method="_on_btn_credits_pressed"]
+[connection signal="pressed" from="UI/Control/Title/VBoxContainer2/MainContent/btn_exit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="UI/Control/Title/VBoxContainer2/Difficulty/btn_normal" to="." method="_on_btn_normal_pressed"]
+[connection signal="focus_entered" from="UI/Control/Title/VBoxContainer2/Difficulty/btn_easy" to="." method="_on_btn_easy_focus_entered"]
+[connection signal="focus_exited" from="UI/Control/Title/VBoxContainer2/Difficulty/btn_easy" to="." method="_on_btn_easy_focus_exited"]
+[connection signal="mouse_entered" from="UI/Control/Title/VBoxContainer2/Difficulty/btn_easy" to="." method="_on_btn_easy_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Control/Title/VBoxContainer2/Difficulty/btn_easy" to="." method="_on_btn_easy_mouse_exited"]
+[connection signal="pressed" from="UI/Control/Title/VBoxContainer2/Difficulty/btn_easy" to="." method="_on_btn_easy_pressed"]
+[connection signal="pressed" from="UI/Control/Title/VBoxContainer2/Difficulty/btn_back" to="." method="_on_btn_back_pressed"]
