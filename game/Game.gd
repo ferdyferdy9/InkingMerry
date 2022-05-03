@@ -48,6 +48,7 @@ func _ready() -> void:
 	MusicPlayer.stop()
 	SfxPlayer.play("gamestart")
 	
+	$UI/Control/InkStorageBar.value = ink
 	$UI/Control/InkStorageBar.max_value = max_ink
 	$UI/Control/InkProgressBar.max_value = score_goal
 	randomize()
@@ -99,6 +100,7 @@ func _process(delta: float) -> void:
 		if !renko_bed.is_asleep:
 			if !has_lost and !has_win:
 				$GameOver.start_game_over()
+				renko_step.anim_player.play("caught")
 				has_lost = true
 	
 	if _is_maribel_sleeping:
@@ -121,6 +123,7 @@ func _process(delta: float) -> void:
 		get_tree().paused = true
 		if !has_win:
 			$GameOver.start_win_screen()
+			renko_step.anim_player.play("blank")
 			has_win = true
 	
 	_just_refill = Input.is_action_pressed("refill") and \
@@ -273,9 +276,12 @@ func _on_maribel_touched_by_illusion() -> void:
 
 
 func _on_Doodling_on_doodle() -> void:
-	if ink > 0 and renko_doodling.is_visible_in_tree():
-		ink -= 5
-		score += 1
+	if renko_doodling.is_visible_in_tree():
+		if ink > 0:
+			ink -= 5
+			score += 1
+		else:
+			$UI/Control/InkStorageBar.shake()
 
 
 func refill(delta) -> void:

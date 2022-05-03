@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=108 format=2]
 
 [ext_resource path="res://game/maribel/MaribelBed.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/Game.gd" type="Script" id=2]
@@ -51,6 +51,17 @@
 [ext_resource path="res://assets/graphic/ui/inkbar_fill.png" type="Texture" id=49]
 [ext_resource path="res://assets/graphic/ui/goalbar_merry1.png" type="Texture" id=50]
 [ext_resource path="res://game/Head.gd" type="Script" id=51]
+[ext_resource path="res://assets/graphic/renko/renkocaught1.png" type="Texture" id=52]
+[ext_resource path="res://assets/graphic/renko/renkocaught2.png" type="Texture" id=53]
+[ext_resource path="res://assets/graphic/ui/goalbar_merry3.png" type="Texture" id=54]
+[ext_resource path="res://assets/graphic/ui/goalbar_merry2.png" type="Texture" id=55]
+[ext_resource path="res://assets/graphic/ui/goalbar_merry4and5.png" type="Texture" id=56]
+[ext_resource path="res://game/InkStorageBar.gd" type="Script" id=57]
+[ext_resource path="res://assets/graphic/ui/inkbar_bubble.png" type="Texture" id=58]
+[ext_resource path="res://assets/graphic/ui/inkbar_mask.png" type="Texture" id=59]
+[ext_resource path="res://game/bubble_stream.gd" type="Script" id=60]
+[ext_resource path="res://assets/graphic/ui/arrow.png" type="Texture" id=61]
+[ext_resource path="res://assets/graphic/ink_2.png" type="Texture" id=62]
 
 [sub_resource type="Animation" id=31]
 length = 0.001
@@ -975,6 +986,24 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=40]
+resource_name = "blank"
+
+[sub_resource type="Animation" id=39]
+resource_name = "caught"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 52 ), ExtResource( 53 ), ExtResource( 52 ) ]
+}
+
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
@@ -1182,6 +1211,98 @@ length = 1.33333
 loop = true
 step = 0.0416667
 
+[sub_resource type="Animation" id=41]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 50 ) ]
+}
+
+[sub_resource type="Animation" id=42]
+resource_name = "sus_0"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 50 ) ]
+}
+
+[sub_resource type="Animation" id=43]
+resource_name = "sus_1"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 55 ) ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "sus_2"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 54 ) ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "sus_3"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 56 ) ]
+}
+
+[sub_resource type="Shader" id=46]
+code = "shader_type canvas_item;
+
+uniform float speed = 0.1f;
+uniform sampler2D mask;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV + vec2(-speed * TIME, 0));
+	color.a = color.a * texture(mask, UV).r;
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=47]
+shader = SubResource( 46 )
+shader_param/speed = 0.05
+shader_param/mask = ExtResource( 59 )
+
 [sub_resource type="Animation" id=33]
 length = 0.001
 tracks/0/type = "value"
@@ -1279,6 +1400,30 @@ tracks/7/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Arrow:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("../../../RealWorld/Ink:texture")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 31 ) ]
 }
 
 [sub_resource type="Animation" id=34]
@@ -1441,6 +1586,30 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Arrow:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../../../RealWorld/Ink:texture")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 31 ) ]
 }
 
 [sub_resource type="Animation" id=35]
@@ -1606,6 +1775,30 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Arrow:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("../../../RealWorld/Ink:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 62 ) ]
 }
 
 [sub_resource type="Animation" id=28]
@@ -2150,9 +2343,14 @@ position = Vector2( 681, 403 )
 texture = ExtResource( 22 )
 
 [node name="RenkoStep" parent="RealWorld" groups=["RenkoStep"] instance=ExtResource( 4 )]
+pause_mode = 2
 visible = false
 position = Vector2( 588, 311 )
 scale = Vector2( -1, 1 )
+
+[node name="AnimationPlayer" parent="RealWorld/RenkoStep" index="1"]
+anims/blank = SubResource( 40 )
+anims/caught = SubResource( 39 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="RealWorld"]
 root_node = NodePath("../..")
@@ -2191,17 +2389,24 @@ texture_progress = ExtResource( 46 )
 texture_progress_offset = Vector2( 26, 15 )
 
 [node name="Head" type="TextureRect" parent="UI/Control/InkProgressBar"]
-visible = false
-margin_left = 4.71232
-margin_top = -2.94618
-margin_right = 66.7123
-margin_bottom = 45.0538
+self_modulate = Color( 0.956863, 0.854902, 0.854902, 1 )
+margin_right = 62.0
+margin_bottom = 48.0
 rect_rotation = 90.0
-rect_pivot_offset = Vector2( 19.6708, 27.6169 )
+rect_pivot_offset = Vector2( 23.3764, 27.6999 )
 texture = ExtResource( 50 )
 script = ExtResource( 51 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Control/InkProgressBar/Head"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 41 )
+anims/sus_0 = SubResource( 42 )
+anims/sus_1 = SubResource( 43 )
+anims/sus_2 = SubResource( 44 )
+anims/sus_3 = SubResource( 45 )
+
 [node name="InkStorageBar" type="TextureProgress" parent="UI/Control"]
+pause_mode = 2
 anchor_bottom = 1.0
 margin_left = 805.0
 margin_top = 421.0
@@ -2211,6 +2416,18 @@ rect_rotation = -89.9999
 step = 0.01
 texture_under = ExtResource( 47 )
 texture_progress = ExtResource( 49 )
+script = ExtResource( 57 )
+
+[node name="TextureRect" type="TextureRect" parent="UI/Control/InkStorageBar"]
+modulate = Color( 1, 1, 1, 0.501961 )
+material = SubResource( 47 )
+margin_right = 357.0
+margin_bottom = 28.0
+rect_clip_content = true
+texture = ExtResource( 58 )
+expand = true
+stretch_mode = 3
+script = ExtResource( 60 )
 
 [node name="ControllerDecider" type="Control" parent="UI/Control"]
 pause_mode = 2
@@ -2249,7 +2466,6 @@ custom_fonts/font = ExtResource( 39 )
 text = "Hold Up to refill Ink"
 
 [node name="Controller" type="Control" parent="UI/Control/ControllerDecider"]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -2290,6 +2506,12 @@ text = "Keep Painting to win!
 And don't let yourself be seen!"
 align = 1
 
+[node name="Arrow" type="Sprite" parent="UI/Control/ControllerDecider"]
+visible = false
+position = Vector2( 463, 316 )
+scale = Vector2( 0.390625, 0.390625 )
+texture = ExtResource( 61 )
+
 [node name="StartupAnimaton" type="AnimationPlayer" parent="UI/Control"]
 root_node = NodePath("../ControllerDecider")
 anims/RESET = SubResource( 33 )
@@ -2309,36 +2531,54 @@ visible = false
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="GameOver/Control2"]
 visible = false
 margin_right = 854.0
 margin_bottom = 480.0
 texture = ExtResource( 43 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect2" type="TextureRect" parent="GameOver/Control2"]
 visible = false
 margin_right = 854.0
 margin_bottom = 480.0
 texture = ExtResource( 44 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect3" type="TextureRect" parent="GameOver/Control2"]
 visible = false
 margin_right = 854.0
 margin_bottom = 480.0
 texture = ExtResource( 45 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect4" type="TextureRect" parent="GameOver/Control2"]
 visible = false
 margin_right = 854.0
 margin_bottom = 480.0
 texture = ExtResource( 41 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect5" type="TextureRect" parent="GameOver/Control2"]
 visible = false
 margin_right = 854.0
 margin_bottom = 480.0
 texture = ExtResource( 28 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect6" type="TextureRect" parent="GameOver/Control2"]
 visible = false
@@ -2346,11 +2586,17 @@ modulate = Color( 1, 1, 1, 0 )
 margin_right = 854.0
 margin_bottom = 480.0
 texture = ExtResource( 42 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Control" type="Control" parent="GameOver"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 38 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Buttons" type="Control" parent="GameOver/Control"]
 visible = false

@@ -36,5 +36,5 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 
 
 func play_brush_stroke() -> void:
-	if is_visible_in_tree():
+	if is_visible_in_tree() and owner.ink > 0:
 		SfxPlayer.play("renkodraw", [0.9, 1.2])
